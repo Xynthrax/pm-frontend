@@ -1,0 +1,123 @@
+<div class="auth-main">
+  <div class="auth-wrapper v3">
+    <div class="auth-form">
+      <div class="card mt-5">
+        <div class="card-body">
+          <a href="javascript:" class="d-flex justify-content-center mt-3">
+            <img src="assets/images/logo-dark.svg" />
+          </a>
+          <div class="row my-3">
+            <div class="d-flex justify-content-center">
+              <div class="auth-header">
+                <h2 class="text-secondary mt-1"><b>Sign up</b></h2>
+              </div>
+            </div>
+          </div>
+
+          <form [formGroup]="signupForm" (ngSubmit)="registerUser()">
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="floatingInput" formControlName="username" placeholder="name@example.com" />
+              <label for="floatingInput">Email Address / Username</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="password" class="form-control" id="floatingInput" formControlName="password" placeholder="name@example.com" />
+              <label for="floatingInput">Password</label>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingInput" formControlName="firstName" placeholder="name@example.com" />
+                  <label for="floatingInput">First Name</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingInput" formControlName="lastName" placeholder="name@example.com" />
+                  <label for="floatingInput">Last Name</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="floatingInput" formControlName="street" placeholder="name@example.com" />
+              <label for="floatingInput">Street</label>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="floatingInput" formControlName="city" placeholder="name@example.com" />
+                  <label for="floatingInput">City</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="floatingInput" formControlName="zipcode" placeholder="name@example.com" />
+                  <label for="floatingInput">Zip Code</label>
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" formControlName="role" id="inlineRadio1" value="patient" />
+                <label class="form-check-label" for="inlineRadio1">Patient</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" formControlName="role" id="inlineRadio2" value="doctor" />
+                <label class="form-check-label" for="inlineRadio2">Doctor</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" formControlName="role" id="inlineRadio3" value="pharmacist" />
+                <label class="form-check-label" for="inlineRadio3">Pharmacist</label>
+              </div>
+            </div>
+
+            <div *ngIf="signupForm.controls['role'].value == 'patient'" class="form-floating mb-3">
+              <input type="text" class="form-control" id="floatingInput" formControlName="insurance" placeholder="name@example.com" />
+              <label for="floatingInput">Insurance Id</label>
+            </div>
+
+            <ng-container *ngIf="signupForm.controls['role'].value == 'doctor'">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInput" formControlName="rate" placeholder="name@example.com" />
+                    <label for="floatingInput">Hour rate</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="floatingInput"
+                      formControlName="speciality"
+                      placeholder="name@example.com"
+                    />
+                    <label for="floatingInput">Medical Speciality</label>
+                    
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <!-- <div *ngIf="signupForm.controls['role'].value == 'pharmacist'" class="form-floating mb-3">
+              <input type="text" class="form-control" id="floatingInput" formControlName="street" placeholder="name@example.com" />
+              <label for="floatingInput">Street</label>
+            </div> -->
+            <div class="form-check mt-3s">
+              <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
+              <label class="form-check-label" for="customCheckc1">
+                <h5>Agree with <span>Terms & Condition.</span></h5>
+              </label>
+            </div>
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-secondary p-2">Sign Up</button>
+            </div>
+          </form>
+          <hr />
+          <h5 class="d-flex justify-content-center">
+            <a [routerLink]="['/login']"> Already have an account? </a>
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

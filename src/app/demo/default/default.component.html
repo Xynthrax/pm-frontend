@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-xl-12 col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row mb-3 align-items-center">
+          <div class="col">
+            <h4>Recent appointments</h4>
+          </div>
+          <div class="col-auto"> </div>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item px-0" *ngFor="let list of appointmentList; let i = index">
+            <div class="align-items-start" style="display: flex; flex-direction: row">
+              <div class="date center" style="min-width: 100px">
+                {{ list.appointmentDTO?.dateTime | date: 'YYYY-MM-dd' }}
+              </div>
+              <div class="center" style="width: 100px">
+                <span
+                  class="badge bg-light-success"
+                  [ngClass]="list.appointmentDTO?.status == 'CHECKED' ? 'bg-light-success' : 'bg-light-primary'"
+                  >{{ list.appointmentDTO?.status }}</span
+                ></div
+              >
+              <div style="display: flex; flex-direction: row; margin-right: 10px">
+                <img src="assets/images/user/default.png" alt="user-image" class="user-avtar profile-pic" />
+              </div>
+              <div class="username center">
+                <span style="font-weight: bold; margin-right: 10px">{{ list.doctorDTO?.firstName }} {{ list.doctorDTO?.lastName }} </span>
+                {{ list.doctorDTO?.medicalSpecialty }}
+              </div>
+              <div class="date center" style="margin-left: auto">
+                <button
+                  [hidden]="list.appointmentDTO?.status != 'NEW'"
+                  class="btn btn-shadow btn-primary btn-sm"
+                  (click)="open(mymodalmeeting, list.appointmentDTO?.id)"
+                  >Meeting link</button
+                >
+              </div>
+              <!-- <div class="col">
+                <h5 class="mb-0">{{ list.name }}</h5>
+                <small class="text-success">{{ list.profit }}</small>
+              </div> -->
+              <div class="col-auto center" style="margin-left: 10px; width: 60px">
+                <!-- Button trigger modal -->
+                <button
+                  [hidden]="list.appointmentDTO?.status != 'CHECKED'"
+                  class="btn btn-shadow btn-secondary btn-sm"
+                  (click)="open(mymodal, list.appointmentDTO?.id)"
+                  >Result</button
+                >
+              </div>
+            </div>
+          </li>
+        </ul>
+        <!-- <div class="text-center">
+          <a href="javascript:" class="b-b-primary text-primary">View all <i class="ti ti-chevron-right"></i></a>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Appointment Detail</h4>
+
+    <button type="button" class="close btn btn-outline-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">X</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div> <span style="font-weight: bold">Date:</span> {{ appointmentDetail.dateTime | date }} </div>
+    <span style="font-weight: bold">Result:</span>
+    <div class="result-detail">
+      {{ appointmentDetail.result }}
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-shadow btn-secondary" (click)="modal.close('Save click')">Ok</button>
+  </div>
+</ng-template>
+
+<!-- Modal -->
+<ng-template #mymodalmeeting let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Meeting Detail</h4>
+
+    <button type="button" class="close btn btn-outline-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">X</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div> <span style="font-weight: bold">Date:</span> {{ appointmentDetail.dateTime | date: 'YYYY-MM-dd hh:mm a' }} </div>
+    <span style="font-weight: bold">Meeting link:</span>
+    <div class="result-detail">
+      <a href="{{appointmentDetail.meetingLink}}" target="_blank">{{ appointmentDetail.meetingLink }}</a>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-shadow btn-secondary" (click)="modal.close('Save click')">Ok</button>
+  </div>
+</ng-template>
