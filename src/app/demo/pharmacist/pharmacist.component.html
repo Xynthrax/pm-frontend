@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-xl-12 col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row mb-3 align-items-center">
+          <div class="col">
+            <h4>Prescriptions</h4>
+          </div>
+          <div class="col-auto"> </div>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item px-0" *ngFor="let list of prescriptionList; let i = index">
+            <div class="align-items-start" style="display: flex; flex-direction: row">
+              <div class="date center" style="min-width: 100px">
+                {{ list.creationDate | date: 'YYYY-MM-dd' }}
+              </div>
+              <div class="center" style="width: 100px">
+                <span class="badge bg-light-success" [ngClass]="list.status == 'CHECKED' ? 'bg-light-success' : 'bg-light-primary'">{{
+                  list.status
+                }}</span></div
+              >
+              <div style="display: flex; flex-direction: row; margin-right: 10px">
+                <img src="assets/images/user/default.png" alt="user-image" class="user-avtar profile-pic" />
+              </div>
+              <div class="username center">
+                <span style="font-weight: bold; margin-right: 10px">{{ list.patientFirstName }} {{ list.patientLastName }} </span>
+              </div>
+              <div class="date center" style="margin-left: auto">
+                <!-- <button
+                    class="btn btn-shadow btn-primary btn-sm"
+                    (click)="open(mymodalmeeting, list)"
+                    >Detail</button
+                  > -->
+              </div>
+              <!-- <div class="col">
+                    <h5 class="mb-0">{{ list.name }}</h5>
+                    <small class="text-success">{{ list.profit }}</small>
+                  </div> -->
+              <div class="col-auto center" style="margin-left: 10px; width: 60px">
+                <!-- Button trigger modal -->
+                <button class="btn btn-shadow btn-secondary btn-sm" (click)="open(mymodal, list)">Detail</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Prescription Detail</h4>
+
+    <button type="button" class="close btn btn-outline-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">X</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div> <span style="font-weight: bold">Date:</span> {{ prescriptionDetail?.creationDate | date }} </div>
+    <div> <span style="font-weight: bold">Customer:</span> {{ prescriptionDetail?.patientFirstName }}  {{ prescriptionDetail?.patientLastName }}</div>
+    <span style="font-weight: bold">Drug List:</span>
+    <div class="result-detail">
+      {{ prescriptionDetail?.drugList }}
+    </div>
+  </div>
+
+  <mat-form-field *ngIf="prescriptionDetail?.status == 'NEW'">
+    <mat-label>Amount</mat-label>
+    <input matInput [formControl]="netControl" placeholder="Amount" type="number" />
+  </mat-form-field>
+  
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-shadow btn-secondary"
+      (click)="deliver(modal)"
+      *ngIf="prescriptionDetail?.status == 'NEW'"
+      [disabled]="!netControl.valid"
+      >Delivered</button
+    >
+    <button type="button" class="btn btn-shadow btn-secondary" (click)="modal.close('Save click')">Cancel</button>
+  </div>
+</ng-template>

@@ -7,6 +7,9 @@ import { SignupComponent } from './components/signup/signup.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AuthGuard } from './shared/auth.guard';
 import DefaultComponent from './demo/default/default.component';
+import SamplePageComponent from './demo/sample-page/sample-page.component';
+import { CheckupComponent } from './demo/checkup/checkup.component';
+import { PharmacistComponent } from './demo/pharmacist/pharmacist.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -29,7 +32,18 @@ const routes: Routes = [
       },
       {
         path: 'appointment',
-        loadComponent: () => import('./demo/sample-page/sample-page.component')
+        component: SamplePageComponent
+        // loadComponent: () => import('./demo/sample-page/sample-page.component')
+      },
+      {
+        path: 'checkup',
+        component: CheckupComponent
+        // loadComponent: () => import('./demo/sample-page/sample-page.component')
+      },
+      {
+        path: 'pharmacist',
+        component: PharmacistComponent
+        // loadComponent: () => import('./demo/sample-page/sample-page.component')
       }
     ]
   }

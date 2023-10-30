@@ -36,5 +36,8 @@ $pc-secondary: map-get($preset-colors, 'preset-1', 'secondary');
 @import 'scss/style-preset.scss';
 
 // fonts
-@import url('scss/fonts/berry/berry-icons.css'); /** custom font icons - berry **/
 @import 'scss/fonts/tabler-icons.min.css';
+@import url('scss/fonts/berry/berry-icons.css'); /** custom font icons - berry **/
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

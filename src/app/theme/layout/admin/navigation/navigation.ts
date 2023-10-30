@@ -11,6 +11,7 @@ export interface NavigationItem {
   target?: boolean;
   breadcrumbs?: boolean;
   children?: Navigation[];
+  hidden?: boolean
 }
 
 export interface Navigation extends NavigationItem {
@@ -18,13 +19,14 @@ export interface Navigation extends NavigationItem {
 }
 const NavigationItems = [
   {
-    id: 'dashboard',
-    title: 'Dashboard',
+    id: 'patient',
+    title: 'Patient',
     type: 'group',
     icon: 'icon-navigation',
+    hidden: true,
     children: [
       {
-        id: 'default',
+        id: 'home',
         title: 'Home',
         type: 'item',
         classes: 'nav-item',
@@ -33,7 +35,7 @@ const NavigationItems = [
         breadcrumbs: false
       },
       {
-        id: 'default',
+        id: 'appointment',
         title: 'Make appointment',
         type: 'item',
         classes: 'nav-item',
@@ -43,38 +45,42 @@ const NavigationItems = [
       },
     ]
   },
-  // {
-  //   id: 'page',
-  //   title: 'Pages',
-  //   type: 'group',
-  //   icon: 'icon-navigation',
-  //   children: [
-  //     {
-  //       id: 'Authentication',
-  //       title: 'Authentication',
-  //       type: 'collapse',
-  //       icon: 'ti ti-key',
-  //       children: [
-  //         {
-  //           id: 'login',
-  //           title: 'Login',
-  //           type: 'item',
-  //           url: '/guest/login',
-  //           target: true,
-  //           breadcrumbs: false
-  //         },
-  //         {
-  //           id: 'register',
-  //           title: 'Register',
-  //           type: 'item',
-  //           url: '/guest/register',
-  //           target: true,
-  //           breadcrumbs: false
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // },
+  {
+    id: 'doctor',
+    title: 'Doctor',
+    type: 'group',
+    icon: 'icon-navigation',
+    hidden: true,
+    children: [
+      {
+        id: 'default',
+        title: 'Checkup',
+        type: 'item',
+        classes: 'nav-item',
+        url: 'checkup',
+        icon: 'ti ti-dashboard',
+        breadcrumbs: false
+      },
+    ]
+  },
+  {
+    id: 'pharmacist',
+    title: 'Pharmacist',
+    type: 'group',
+    icon: 'icon-navigation',
+    hidden: true,
+    children: [
+      {
+        id: 'default',
+        title: 'Prescription List',
+        type: 'item',
+        classes: 'nav-item',
+        url: 'pharmacist',
+        icon: 'ti ti-dashboard',
+        breadcrumbs: false
+      },
+    ]
+  },
   // {
   //   id: 'elements',
   //   title: 'Elements',

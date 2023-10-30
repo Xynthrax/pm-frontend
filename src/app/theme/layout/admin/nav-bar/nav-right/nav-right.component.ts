@@ -17,5 +17,6 @@ export class NavRightComponent {
 
   logOut(){
     this.authService.doLogout();
+    localStorage.removeItem('user')
   }
 }

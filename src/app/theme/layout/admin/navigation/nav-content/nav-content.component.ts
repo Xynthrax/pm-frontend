@@ -1,5 +1,5 @@
 // Angular import
-import { Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
 import { Location, LocationStrategy } from '@angular/common';
 import { environment } from 'src/environments/environment';
 
@@ -26,16 +26,34 @@ export class NavContentComponent implements OnInit {
     public nav: NavigationItem,
     private zone: NgZone,
     private location: Location,
-    private locationStrategy: LocationStrategy
+    private locationStrategy: LocationStrategy,
+    private changeDetector: ChangeDetectorRef
   ) {
     this.navigation = this.nav.get();
   }
 
   // Life cycle events
   ngOnInit() {
+    console.log(this.navigation)
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if(user.patient){
+      this.navigation[0].hidden = false;
+    }
+    if(user.doctor){
+      this.navigation[1].hidden = false;
+    }
+    if(user.pharmacist){
+      this.navigation[2].hidden = false;
+    }
+    this.changeDetector.detectChanges();
     if (this.windowWidth < 1025) {
       (document.querySelector('.coded-navbar') as HTMLDivElement).classList.add('menupos-static');
     }
+  }
+
+  ngAfterViewInit(){
+    
   }
 
   fireOutClick() {

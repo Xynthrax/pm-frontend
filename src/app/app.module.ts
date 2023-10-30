@@ -23,7 +23,24 @@ import { SignupComponent } from './components/signup/signup.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './shared/authconfig.interceptor';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider'; 
+import {MatListModule} from '@angular/material/list';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatStepperModule} from '@angular/material/stepper';
+
+import SamplePageComponent from './demo/sample-page/sample-page.component';
+// import { AlertModule } from './alert/alert.module';
+import { AlertComponent } from './alert/alert/alert.component';
+import { CheckupComponent } from './demo/checkup/checkup.component';
+import { MatSelectModule } from '@angular/material/select';
+import { PharmacistComponent } from './demo/pharmacist/pharmacist.component';
 
 @NgModule({
   declarations: [
@@ -43,8 +60,32 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SigninComponent,
     SignupComponent,
     UserProfileComponent,
+    SamplePageComponent,
+    AlertComponent,
+    CheckupComponent,
+    PharmacistComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, BrowserAnimationsModule, HttpClientModule, NgbModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SharedModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    NgbModule,
+    NgbAlertModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatIconModule,
+    MatDividerModule,
+    MatListModule,
+    MatPaginatorModule,
+    MatStepperModule,
+    MatSelectModule 
+    // AlertModule
+  ],
   providers: [
     NavigationItem,
     {
@@ -53,7 +94,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       multi: true
     }
   ],
-  bootstrap: [AppComponent],
-  
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

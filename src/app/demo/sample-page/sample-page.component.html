@@ -2,12 +2,68 @@
   <div class="col-xl-12 col-md-12">
     <div class="card">
       <div class="card-body">
-        <div class="row mb-3 align-items-center">
+        <div class="col mb-3 align-items-center">
           <div class="col">
-            <h4>Make appointments</h4>
+            <h4>Make appointment</h4>
           </div>
-          <div class="col-auto"> {{ doctorList | json }} </div>
 
+          <mat-stepper #stepper>
+            <mat-step label="Select doctor">
+              <mat-selection-list [multiple]="false" #doctorsList>
+                <mat-list-option *ngFor="let doctor of doctorList" (click)="handleSelectionChange(doctor)">
+                  <div style="display: flex; flex-direction: row">
+                    <div style="width: 200px"> {{ doctor.firstName }} {{ doctor.lastName }} </div>
+                    <div style="flex-grow: 1">
+                      {{ doctor.medicalSpecialty }}
+                    </div>
+                  </div>
+                </mat-list-option>
+              </mat-selection-list>
+              <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"> </mat-paginator>
+              <div>
+                <button class="btn btn-secondary" matStepperPrevious >Back</button>
+                <button class="btn btn-secondary" matStepperNext [disabled]="!doctorId" (click)="chooseDate()" >Next</button>
+              </div>
+            </mat-step>
+            <mat-step [stepControl]="secondFormGroup" label="Choose date">
+              <div class="" style="display: flex; flex-direction: row; margin-top: 15px;">
+                <div class="calendar col-xl-6 col-md-6">
+                  <mat-card class="demo-inline-calendar-card" style="max-width: 300px;">
+                    <mat-calendar
+                      [(selected)]="selected"
+                      [dateFilter]="myFilter"
+                      [startAt]="minDate"
+                      [minDate]="minDate"
+                      [maxDate]="maxDate"
+                      (selectedChange)="handleDateChange($event)"
+                    ></mat-calendar>
+                  </mat-card>
+                </div>
+                <div class="time col-xl-6 col-md-6">
+                  <span>Choose available time</span>
+                  <mat-selection-list [multiple]="false" #timeList>
+                    <mat-list-option *ngFor="let time of times" (click)="handleTimeSelectionChange(time)" [disabled]="time.disabled">
+                      <div style="display: flex; flex-direction: row">
+                        {{time.text}}
+                      </div>
+                    </mat-list-option>
+                  </mat-selection-list>
+                </div>
+              </div>
+              <div>
+                <button class="btn btn-secondary" matStepperPrevious>Back</button>
+                <button class="btn btn-secondary" matStepperNext (click)="createAppointment()" [disabled]="!selectedTime">Create Appointment</button>
+              </div>
+            </mat-step>
+            <!-- <mat-step>
+              <ng-template matStepLabel>Done</ng-template>
+              <p>You are now done.</p>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
+              </div>
+            </mat-step> -->
+          </mat-stepper>
         </div>
       </div>
     </div>
